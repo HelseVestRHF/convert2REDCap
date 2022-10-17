@@ -1,4 +1,4 @@
-function process(data) {
+function process(data, filename) {
     // gets an array of variables and converts to JSON
     var header = data[0];
 
@@ -46,6 +46,18 @@ function process(data) {
         jsonVersion.push(entry);
     }
     jQuery('#jsonV').text(JSON.stringify(jsonVersion, null, 2));
+    if (1) { // download
+        var downloadLink = document.createElement("a");
+        downloadLink.download = filename.replace(".csv", ".json");
+        var myBlob = new Blob([JSON.stringify(jsonVersion, null, 2)], { type: "application/json" });
+        downloadLink.href = window.URL.createObjectURL(myBlob);
+        downloadLink.onclick = function (e) {
+            document.body.removeChild(e.target);
+        };
+        downloadLink.style.display = "none";
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+    }
 
     // add the rows to the table
     var str = "";
@@ -61,12 +73,13 @@ function process(data) {
 }
 
 function upload(data) {
-    console.log(JSON.stringify(data));
+    //console.log(JSON.stringify(data));
+    var filename = data[0].name;
     var fr = new FileReader();
     fr.onload = function () {
         var csv = fr.result;
         var data = Papa.parse(csv);
-        process(data.data);
+        process(data.data, filename);
         //console.log(JSON.stringify(data.data));
 
     };
