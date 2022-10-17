@@ -2,7 +2,7 @@ function process(data) {
     // gets an array of variables and converts to JSON
     var header = data[0];
 
-    var jsonVersion = [];
+    var jsonVersion = []; // an array of structs
 
     // add the header to the table
     var str = "<tr>";
@@ -37,7 +37,7 @@ function process(data) {
     jQuery("#output").html(JSON.stringify(merged_data));
 
     // add to JSON version
-    for (var i = 0; i < merged_data.length; i++) {
+    for (var i = 1; i < merged_data.length; i++) {
         var row = merged_data[i];
         var entry = {};
         for (var j = 0; j < row.length; j++) {
@@ -45,11 +45,11 @@ function process(data) {
         }
         jsonVersion.push(entry);
     }
-    jQuery('#jsonV').text(JSON.stringify(jsonVersion));
+    jQuery('#jsonV').text(JSON.stringify(jsonVersion, null, 2));
 
     // add the rows to the table
     var str = "";
-    for (var i = 0; i < merged_data.length; i++) {
+    for (var i = 1; i < merged_data.length; i++) {
         str += "<tr>";
         var row = merged_data[i];
         for (var j = 0; j < row.length; j++) {
