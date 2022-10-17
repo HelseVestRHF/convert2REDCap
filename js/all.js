@@ -1,6 +1,9 @@
 function process(data) {
     // gets an array of variables and converts to JSON
     var header = data[0];
+
+    var jsonVersion = [];
+
     // add the header to the table
     var str = "<tr>";
     for (var i = 0; i < header.length; i++) {
@@ -33,6 +36,17 @@ function process(data) {
     }
     jQuery("#output").html(JSON.stringify(merged_data));
 
+    // add to JSON version
+    for (var i = 0; i < merged_data.length; i++) {
+        var row = merged_data[i];
+        var entry = {};
+        for (var j = 0; j < row.length; j++) {
+            entry[header[j]] = row[j];
+        }
+        jsonVersion.push(entry);
+    }
+    jQuery('#jsonV').text(JSON.stringify(jsonVersion));
+
     // add the rows to the table
     var str = "";
     for (var i = 0; i < merged_data.length; i++) {
@@ -61,14 +75,14 @@ function upload(data) {
 }
 
 jQuery(document).ready(function () {
-    console.log("HI");
+    //console.log("HI");
 
     $('#drop-here').on(
         'dragover',
         function (e) {
             e.preventDefault();
             e.stopPropagation();
-            console.log("dragover");
+            //console.log("dragover");
             return true;
         }
     )
@@ -84,10 +98,10 @@ jQuery(document).ready(function () {
     jQuery('#drop-here').on('drop', function (e) {
         e.preventDefault();
         e.stopPropagation();
-        console.log("drop here");
+        //console.log("drop here");
         if (e.originalEvent.dataTransfer && e.originalEvent.dataTransfer.files.length) {
             /*UPLOAD FILES HERE*/
-            console.log("got a file");
+            //console.log("got a file");
             upload(e.originalEvent.dataTransfer.files);
         }
         return false;

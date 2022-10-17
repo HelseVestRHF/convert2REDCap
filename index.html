@@ -12,7 +12,9 @@
 <body>
     <div class="container">
         <div class="row" style="margin-top: 30px;">
+            <div class="row">
             <p>This page will try to convert an uploaded data dictionary to REDCap format.</p>
+        </div>
         </div>
         <div class="row">
             <div class="col-3">
@@ -30,7 +32,7 @@
         <div class="row" style="margin-top: 30px;">
             <div class="col table-responsive"
                 style="height: 200px; overflow-y: auto; border: 1px; solid grey; border-radius: 3px;">
-                <table class="table table-striped table-sm table-hover table-bordered" id="table">
+                <table class="table table-striped table-sm table-hover table-bordered">
                     <caption>Merged data dictionary</caption>
                     <thead id="thead">
 
@@ -41,11 +43,14 @@
                 </table>
             </div>
         </div>
+        <div class="row" style="margin-top: 30px;">
+            <div class="col">
+                <div id="output" style="height: 300px; overflow-y: auto; border: 1px solid grey; padding: 5px;"></div>
+            </div>
+        </div>
         <div class="row" style="margin-top: 30px; margin-bottom: 30px;">
             <div class="col">
-                <div id="output" style="height: 300px; overflow-y: auto; border: 1px solid grey; padding: 5px;">
-
-                </div>
+                <div id="jsonV" style="height: 300px; overflow-y: auto;"> </div>
             </div>
         </div>
     </div>
