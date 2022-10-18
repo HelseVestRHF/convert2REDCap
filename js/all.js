@@ -35,6 +35,8 @@ function process(data, filename) {
         }
     }
     jQuery("#output").html(JSON.stringify(merged_data));
+    jQuery("#stats").children().remove();
+    jQuery('#stats').html(" (" + merged_data.length + " fields)");
 
     // add to JSON version
     for (var i = 1; i < merged_data.length; i++) {
@@ -79,6 +81,13 @@ function upload(data) {
     fr.onload = function () {
         var csv = fr.result;
         var data = Papa.parse(csv);
+
+        // clear out the previous content
+        jQuery('#tbody').children().remove();
+        jQuery('#thead').children().remove();
+        jQuery('#output').text("");
+        jQuery('#jsonV').text("");
+
         process(data.data, filename);
         //console.log(JSON.stringify(data.data));
 
@@ -104,7 +113,7 @@ jQuery(document).ready(function () {
         function (e) {
             e.preventDefault();
             e.stopPropagation();
-            console.log("dragenter");
+            //console.log("dragenter");
         }
     );
 
